@@ -35,4 +35,5 @@ color = Color( 1, 1, 1, 0.619608 )
 [node name="SensorM" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SensorM"]
+position = Vector2( -25, -1 )
 shape = SubResource( 1 )

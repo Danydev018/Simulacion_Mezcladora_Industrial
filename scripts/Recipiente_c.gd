@@ -35,3 +35,6 @@ func vaciar_en_mezclador():
 	peso_actual = 0
 	$LabelPeso.text = "0g"
 	emit_signal("vaciado_completo")
+
+func get_peso():
+	return peso_actual

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Recipiente_c.gd" type="Script" id=1]
 [ext_resource path="res://assets/contenedor2.png" type="Texture" id=2]
+[ext_resource path="res://assets/valvula.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.0
@@ -24,23 +25,48 @@ scale = Vector2( 1, 0.961538 )
 shape = SubResource( 1 )
 
 [node name="LabelPeso" type="Label" parent="."]
-margin_left = 454.0
-margin_top = 245.0
-margin_right = 494.0
-margin_bottom = 259.0
+margin_left = 446.0
+margin_top = 246.0
+margin_right = 486.0
+margin_bottom = 260.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+align = 1
 
 [node name="FlujOff" type="ColorRect" parent="."]
 margin_left = 461.0
 margin_top = 316.0
 margin_right = 481.0
 margin_bottom = 376.0
-rect_scale = Vector2( 1, 1.36 )
+rect_scale = Vector2( 1, 0.439998 )
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="FlujOff2" type="ColorRect" parent="."]
+margin_left = 461.0
+margin_top = 369.0
+margin_right = 481.0
+margin_bottom = 429.0
+rect_scale = Vector2( 1, 0.479999 )
 color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
 [node name="FlujoCtoM" type="ColorRect" parent="."]
-visible = false
 margin_left = 462.0
 margin_top = 317.0
 margin_right = 482.0
 margin_bottom = 377.0
-rect_scale = Vector2( 0.916579, 1.32 )
+rect_scale = Vector2( 0.916579, 0.479996 )
+
+[node name="FlujoCtoM2" type="ColorRect" parent="."]
+margin_left = 462.0
+margin_top = 372.0
+margin_right = 482.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.916579, 0.399998 )
+
+[node name="ValveCM" type="Sprite" parent="."]
+position = Vector2( 506, 331 )
+rotation = -1.56621
+scale = Vector2( 0.159997, 0.16946 )
+texture = ExtResource( 3 )
+offset = Vector2( -168, -311 )
