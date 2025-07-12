@@ -1,0 +1,203 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/Recipiente_c.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/iu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Recipiente_final.png" type="Texture" id=3]
+[ext_resource path="res://scenes/mezclador.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/contenedor.png" type="Texture" id=5]
+[ext_resource path="res://scripts/main.gd" type="Script" id=6]
+[ext_resource path="res://assets/valvula.png" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.0
+
+[node name="main" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="UI" parent="." instance=ExtResource( 2 )]
+
+[node name="RecipienteC" parent="." instance=ExtResource( 1 )]
+position = Vector2( -122, 68 )
+scale = Vector2( 1, 1.00834 )
+
+[node name="Mezclador" parent="." instance=ExtResource( 4 )]
+position = Vector2( 370, 523 )
+
+[node name="ValvulaFinal" type="Node2D" parent="Mezclador"]
+
+[node name="Cuerpo" type="Sprite" parent="Mezclador/ValvulaFinal"]
+position = Vector2( -275.926, -23 )
+scale = Vector2( 0.185189, 0.159999 )
+texture = ExtResource( 7 )
+
+[node name="Sensor" type="Area2D" parent="Mezclador/ValvulaFinal"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mezclador/ValvulaFinal/Sensor"]
+shape = SubResource( 1 )
+
+[node name="DescargaTuboOff" type="ColorRect" parent="Mezclador"]
+margin_left = -104.042
+margin_top = -14.623
+margin_right = -64.0423
+margin_bottom = 25.377
+rect_min_size = Vector2( 0, -20 )
+rect_rotation = 90.1641
+rect_scale = Vector2( 0.424449, 3.86094 )
+color = Color( 0.572549, 0.572549, 0.572549, 1 )
+
+[node name="DescargaTubo" type="ColorRect" parent="Mezclador"]
+visible = false
+margin_left = -104.214
+margin_top = -12.7578
+margin_right = -64.2144
+margin_bottom = 27.2422
+rect_min_size = Vector2( 0, -20 )
+rect_rotation = 90.1641
+rect_scale = Vector2( 0.350371, 1.61995 )
+
+[node name="DepositoA" type="Node2D" parent="."]
+position = Vector2( 97, 32 )
+
+[node name="Cuerpo" type="Sprite" parent="DepositoA"]
+position = Vector2( 124, 94 )
+scale = Vector2( -0.460171, 0.34668 )
+texture = ExtResource( 5 )
+
+[node name="Valve" type="Sprite" parent="DepositoA"]
+position = Vector2( 149, 219 )
+rotation = 1.57388
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
+
+[node name="FlujOff" type="ColorRect" parent="DepositoA"]
+margin_left = 117.0
+margin_top = 139.0
+margin_right = 137.0
+margin_bottom = 199.0
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="FlujOff2" type="ColorRect" parent="DepositoA"]
+margin_left = 118.0
+margin_top = 238.0
+margin_right = 138.0
+margin_bottom = 298.0
+rect_scale = Vector2( 1, 0.68 )
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="FlujOff3" type="ColorRect" parent="DepositoA"]
+margin_left = 138.0
+margin_top = 258.0
+margin_right = 158.0
+margin_bottom = 318.0
+rect_rotation = 89.8799
+rect_scale = Vector2( 1.04, -1.16167 )
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="Flujo3" type="ColorRect" parent="DepositoA"]
+visible = false
+margin_left = 138.0
+margin_top = 258.0
+margin_right = 158.0
+margin_bottom = 318.0
+rect_rotation = 89.8799
+rect_scale = Vector2( 1.04, -1.16167 )
+color = Color( 1, 0.984314, 0, 1 )
+
+[node name="Flujo" type="ColorRect" parent="DepositoA"]
+visible = false
+margin_left = 117.0
+margin_top = 139.0
+margin_right = 137.0
+margin_bottom = 199.0
+color = Color( 1, 0.937255, 0, 1 )
+
+[node name="Flujo2" type="ColorRect" parent="DepositoA"]
+visible = false
+margin_left = 118.0
+margin_top = 238.0
+margin_right = 138.0
+margin_bottom = 298.0
+rect_scale = Vector2( 1, 0.68 )
+color = Color( 0.992157, 1, 0, 1 )
+
+[node name="DepositoB" type="Node2D" parent="."]
+position = Vector2( 348, 33 )
+
+[node name="Cuerpo" type="Sprite" parent="DepositoB"]
+position = Vector2( 124, 94 )
+scale = Vector2( -0.460171, 0.34668 )
+texture = ExtResource( 5 )
+
+[node name="Valve" type="Sprite" parent="DepositoB"]
+position = Vector2( 149, 219 )
+rotation = 1.57388
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
+
+[node name="FlujOff" type="ColorRect" parent="DepositoB"]
+margin_left = 117.0
+margin_top = 139.0
+margin_right = 137.0
+margin_bottom = 199.0
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="FlujOff2" type="ColorRect" parent="DepositoB"]
+margin_left = 118.0
+margin_top = 238.0
+margin_right = 138.0
+margin_bottom = 298.0
+rect_scale = Vector2( 1, 0.68 )
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="FlujOff3" type="ColorRect" parent="DepositoB"]
+margin_left = 131.0
+margin_top = 279.0
+margin_right = 151.0
+margin_bottom = 339.0
+rect_rotation = 89.8799
+rect_scale = Vector2( -1.03991, 1.43825 )
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="Flujo3" type="ColorRect" parent="DepositoB"]
+visible = false
+margin_left = 131.0
+margin_top = 279.0
+margin_right = 151.0
+margin_bottom = 339.0
+rect_rotation = 89.8799
+rect_scale = Vector2( -1.03991, 1.43825 )
+color = Color( 0.00784314, 0.419608, 1, 1 )
+
+[node name="Flujo" type="ColorRect" parent="DepositoB"]
+visible = false
+margin_left = 117.0
+margin_top = 139.0
+margin_right = 137.0
+margin_bottom = 199.0
+color = Color( 0.0352941, 0.435294, 1, 1 )
+
+[node name="Flujo2" type="ColorRect" parent="DepositoB"]
+visible = false
+margin_left = 118.0
+margin_top = 238.0
+margin_right = 138.0
+margin_bottom = 298.0
+rect_scale = Vector2( 1, 0.68 )
+color = Color( 0.0627451, 0.407843, 1, 1 )
+
+[node name="VertidoFinal" type="Node2D" parent="."]
+position = Vector2( 0, 4 )
+
+[node name="Cuerpo" type="Sprite" parent="VertidoFinal"]
+position = Vector2( 698, 558 )
+scale = Vector2( 0.169231, 0.160001 )
+texture = ExtResource( 3 )
+
+[node name="FluidoVertido" type="ColorRect" parent="VertidoFinal"]
+visible = false
+margin_left = 677.0
+margin_top = 538.0
+margin_right = 717.0
+margin_bottom = 578.0
+rect_scale = Vector2( 1.08, 1.2 )
+color = Color( 1, 1, 1, 0.66 )
