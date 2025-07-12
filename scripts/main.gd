@@ -14,10 +14,15 @@ onready var deposito_b = $DepositoB
 onready var recipiente_c = $RecipienteC
 onready var mezclador = $Mezclador
 onready var valvula_cm = $RecipienteC/ValveCM
+onready var sensor_a_mesh = $UI/SensorA
+onready var sensor_b_mesh = $UI/SensorB
+onready var sensor_c_mesh = $UI/SensorC
+onready var sensor_m_mesh: MeshInstance2D = $UI/SensorM
+onready var sensor_f_mesh: MeshInstance2D = $UI/SensorF
 
 signal mezcla_final_depositada
 
-
+var recipiente_final_lleno = false
 var estado_sensor_a
 var estado_sensor_b
 var estado_sensor_c
@@ -77,9 +82,11 @@ func _on_iniciar():
 	llenar_producto_a()
 	# Cargar depósitos con valores del input
 	deposito_a.cargar(ui.get_pesoA())
-	deposito_b.cargar(ui.get_pesoB())
+	#deposito_b.cargar(ui.get_pesoB())
 	actualizar_panel_sensores()
 
+	recipiente_final_lleno = false
+	actualizar_panel_sensores()
 
 # -------------------
 # Fase A
@@ -143,6 +150,7 @@ func _on_vaciado_a():
 # Fase B
 # -------------------
 func llenar_producto_b():
+	deposito_b.cargar(ui.get_pesoB())
 	var peso_b = ui.get_pesoB()
 	recipiente_c.comenzar_llenado(peso_b)
 	recipiente_c.connect("peso_alcanzado", self, "_on_b_listo")
@@ -201,7 +209,8 @@ func _on_vaciado_b():
 # -------------------
 
 func _on_mezcla_completada():
-	
+	recipiente_final_lleno = true
+	actualizar_panel_sensores()
 	mezclador.disconnect("mezcla_listo", self, "_on_mezcla_completada")
 	print("Mezcla completada. Descargando contenido del mezclador...")
 
@@ -215,6 +224,7 @@ func _on_mezcla_completada():
 
 	
 func _on_descarga_completa():
+	
 	mezclador.disconnect("descarga_listo", self, "_on_descarga_completa")
 	print("Descarga completa. Preparando válvula final...")
 
@@ -231,59 +241,55 @@ func _abrir_valvula_seguro():
 		print("⚠️ Mezclador no está vacío. Válvula no se puede abrir.")
 		
 func _on_mezcla_final_recibida():
+	recipiente_final_lleno = false
+	actualizar_panel_sensores()
 	ui.set_estado("🧪 Recipiente final lleno. Proceso completo.")
 	print("Recipiente destino ha recibido la mezcla.")
-	actualizar_panel_sensores()
 	mezclador.cerrar_valvula_final()
 
 
 func actualizar_panel_sensores():
+
+	var COLOR_VERDE = Color(0, 1, 0, 1) 
+	var COLOR_ROJO = Color(1, 0, 0, 1)   
+
 	# Sensor A
-	var lleno_a = deposito_a.get_cantidad() >= ui.get_pesoA()
-
-	if lleno_a:
-		estado_sensor_a.text = "LLENO"
-		indicador_a.color = Color(0, 1, 0)  # verde
-	else:
-		estado_sensor_a.text = "VACÍO"
-		indicador_a.color = Color(1, 0, 0)  # rojo
-
-	# Sensor B
-	var lleno_b = deposito_b.get_cantidad() >= ui.get_pesoB()
-
-	if lleno_b:
-		estado_sensor_b.text = "LLENO"
-		indicador_b.color = Color(0, 1, 0)
-	else:
-		estado_sensor_b.text = "VACÍO"
-		indicador_b.color = Color(1, 0, 0)
+	var deposito_a_lleno = deposito_a.get_cantidad() > 0
+	estado_sensor_a.text = "LLENO" if deposito_a_lleno else "VACÍO"
+	indicador_a.color = COLOR_VERDE if deposito_a_lleno else COLOR_ROJO
+	sensor_a_mesh.modulate = COLOR_VERDE if deposito_a_lleno else COLOR_ROJO
+	
+	# Sensor B - Depósito B
+	var deposito_b_lleno = deposito_b.get_cantidad() > 0
+	estado_sensor_b.text = "LLENO" if deposito_b_lleno else "VACÍO"
+	indicador_b.color = COLOR_VERDE if deposito_b_lleno else COLOR_ROJO
+	sensor_b_mesh.modulate = COLOR_VERDE if deposito_b_lleno else COLOR_ROJO
 
 	# Sensor C (Recipiente)
 	var lleno_c = recipiente_c.get_peso() > 0
 
 	if lleno_c:
 		estado_sensor_c.text = "LLENO"
-		indicador_c.color = Color(0, 1, 0)
+		indicador_c.color = COLOR_VERDE
+		sensor_c_mesh.modulate = COLOR_VERDE
 	else:
 		estado_sensor_c.text = "VACÍO"
-		indicador_c.color = Color(1, 0, 0)
+		indicador_c.color = COLOR_ROJO
+		sensor_c_mesh.modulate = COLOR_ROJO
 
 	# Sensor M (Motor mezclador)
 	var mezclando = mezclador.esta_mezclando()
 
 	if mezclando:
 		estado_sensor_m.text = "MEZCLANDO"
-		indicador_m.color = Color(1, 0, 0)  # rojo
+		indicador_m.color = COLOR_VERDE  # rojo
+		sensor_m_mesh.modulate = COLOR_VERDE
 	else:
 		estado_sensor_m.text = "VACÍO"
-		indicador_m.color = Color(0, 1, 0)  # verde
+		indicador_m.color = COLOR_ROJO  # verde
+		sensor_m_mesh.modulate = COLOR_ROJO
 
-	# Sensor F (Final del mezclador)
-	var vacio_f = mezclador.esta_vacio()
-
-	if vacio_f:
-		estado_sensor_f.text = "VACÍO"
-		indicador_f.color = Color(0, 1, 0)  # verde
-	else:
-		estado_sensor_f.text = "LLENO"
-		indicador_f.color = Color(1, 0, 0)  # rojo
+	# Sensor F - Recipiente Final
+	estado_sensor_f.text = "LLENO" if recipiente_final_lleno else "VACÍO"
+	indicador_f.color = COLOR_VERDE if recipiente_final_lleno else COLOR_ROJO
+	sensor_f_mesh.modulate = COLOR_VERDE if recipiente_final_lleno else COLOR_ROJO

@@ -19,3 +19,14 @@ func get_tiempo_mezcla():
 	
 func set_estado(texto):
 	$LabelEstado.text = "Estado: " + texto
+
+func get_sensor_A():
+	return $SensorA
+func get_sensor_B():
+	return $SensorB
+func get_sensor_F():
+	return $SensorF
+func get_sensor_C():
+	return $SensorC
+func get_sensor_M():
+	return $SensorM

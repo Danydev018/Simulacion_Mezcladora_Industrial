@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Recipiente_c.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/iu.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scripts/main.gd" type="Script" id=6]
 [ext_resource path="res://assets/valvula.png" type="Texture" id=7]
 [ext_resource path="res://scripts/deposito.gd" type="Script" id=8]
+[ext_resource path="res://scripts/VertidoFinal.gd" type="Script" id=9]
 
 [sub_resource type="QuadMesh" id=2]
 
@@ -294,6 +295,7 @@ color = Color( 0.0627451, 0.407843, 1, 1 )
 
 [node name="VertidoFinal" type="Node2D" parent="."]
 position = Vector2( 0, 4 )
+script = ExtResource( 9 )
 
 [node name="Cuerpo" type="Sprite" parent="VertidoFinal"]
 position = Vector2( 696, 558 )
@@ -310,10 +312,10 @@ rect_scale = Vector2( 1.08, 1.2 )
 color = Color( 1, 1, 1, 0.66 )
 
 [node name="PanelSensores" type="Panel" parent="."]
-margin_left = 838.0
-margin_top = 304.0
-margin_right = 878.0
-margin_bottom = 344.0
+margin_left = 830.0
+margin_top = 300.0
+margin_right = 870.0
+margin_bottom = 340.0
 rect_scale = Vector2( 6.805, 4.57523 )
 rect_pivot_offset = Vector2( 18, 31 )
 
@@ -323,107 +325,117 @@ margin_top = 226.0
 margin_right = 845.0
 margin_bottom = 312.0
 rect_scale = Vector2( 1.32, 1.35956 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="SensorA" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 101.0
+margin_right = 111.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="IndicadorA" type="ColorRect" parent="VBoxContainer/SensorA"]
+margin_right = 10.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 10, 0 )
 
 [node name="Label" type="Label" parent="VBoxContainer/SensorA"]
-margin_right = 56.0
+margin_left = 14.0
+margin_right = 70.0
 margin_bottom = 14.0
 text = "Sensor A"
 
 [node name="LabelEstadoA" type="Label" parent="VBoxContainer/SensorA"]
-margin_left = 60.0
-margin_right = 94.0
+margin_left = 74.0
+margin_right = 108.0
 margin_bottom = 14.0
 text = "Vacio"
 
-[node name="IndicadorA" type="ColorRect" parent="VBoxContainer/SensorA"]
-margin_left = 98.0
-margin_right = 98.0
-margin_bottom = 14.0
-
 [node name="SensorB" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 18.0
-margin_right = 101.0
+margin_right = 111.0
 margin_bottom = 32.0
 
+[node name="IndicadorB" type="ColorRect" parent="VBoxContainer/SensorB"]
+margin_right = 10.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 10, 0 )
+
 [node name="Label" type="Label" parent="VBoxContainer/SensorB"]
-margin_right = 56.0
+margin_left = 14.0
+margin_right = 70.0
 margin_bottom = 14.0
 text = "Sensor B"
 
 [node name="LabelEstadoB" type="Label" parent="VBoxContainer/SensorB"]
-margin_left = 60.0
-margin_right = 94.0
+margin_left = 74.0
+margin_right = 108.0
 margin_bottom = 14.0
 text = "Vacio"
 
-[node name="IndicadorB" type="ColorRect" parent="VBoxContainer/SensorB"]
-margin_left = 98.0
-margin_right = 98.0
-margin_bottom = 14.0
-
 [node name="SensorC" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 36.0
-margin_right = 101.0
+margin_right = 111.0
 margin_bottom = 50.0
 
+[node name="IndicadorC" type="ColorRect" parent="VBoxContainer/SensorC"]
+margin_right = 10.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 10, 0 )
+
 [node name="Label" type="Label" parent="VBoxContainer/SensorC"]
-margin_right = 55.0
+margin_left = 14.0
+margin_right = 69.0
 margin_bottom = 14.0
 text = "Sensor C"
 
 [node name="LabelEstadoC" type="Label" parent="VBoxContainer/SensorC"]
-margin_left = 59.0
-margin_right = 93.0
+margin_left = 73.0
+margin_right = 107.0
 margin_bottom = 14.0
 text = "Vacio"
 
-[node name="IndicadorC" type="ColorRect" parent="VBoxContainer/SensorC"]
-margin_left = 97.0
-margin_right = 97.0
-margin_bottom = 14.0
-
 [node name="SensorM" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 54.0
-margin_right = 101.0
+margin_right = 111.0
 margin_bottom = 68.0
 
+[node name="IndicadorM" type="ColorRect" parent="VBoxContainer/SensorM"]
+margin_right = 10.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 10, 0 )
+
 [node name="Label" type="Label" parent="VBoxContainer/SensorM"]
-margin_right = 59.0
+margin_left = 14.0
+margin_right = 73.0
 margin_bottom = 14.0
 text = "Sensor M"
 
 [node name="LabelEstadoM" type="Label" parent="VBoxContainer/SensorM"]
-margin_left = 63.0
-margin_right = 97.0
+margin_left = 77.0
+margin_right = 111.0
 margin_bottom = 14.0
 text = "Vacio"
 
-[node name="IndicadorM" type="ColorRect" parent="VBoxContainer/SensorM"]
-margin_left = 101.0
-margin_right = 101.0
-margin_bottom = 14.0
-
 [node name="SensorF" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 72.0
-margin_right = 101.0
+margin_right = 111.0
 margin_bottom = 86.0
 
+[node name="IndicadorF" type="ColorRect" parent="VBoxContainer/SensorF"]
+margin_right = 10.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 10, 0 )
+
 [node name="Label" type="Label" parent="VBoxContainer/SensorF"]
-margin_right = 54.0
+margin_left = 14.0
+margin_right = 68.0
 margin_bottom = 14.0
 text = "Sensor F"
 
 [node name="LabelEstadoF" type="Label" parent="VBoxContainer/SensorF"]
-margin_left = 58.0
-margin_right = 92.0
+margin_left = 72.0
+margin_right = 106.0
 margin_bottom = 14.0
 text = "Vacio"
-
-[node name="IndicadorF" type="ColorRect" parent="VBoxContainer/SensorF"]
-margin_left = 96.0
-margin_right = 96.0
-margin_bottom = 14.0

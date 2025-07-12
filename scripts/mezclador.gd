@@ -113,6 +113,17 @@ func emitir_mezcla_final():
 	flujo.rect_size = Vector2(10, 0)
 	emit_signal("mezcla_final_depositada")
 	print("🧪 Mezcla final depositada en el recipiente destino.")
+	
+		# Marcar el recipiente final como lleno
+	var vertido_final = get_node("/root/main/VertidoFinal")
+	if vertido_final.has_method("set_lleno"):
+		vertido_final.set_lleno(true)
+	# Actualizar sensores
+	get_node("/root/main").actualizar_panel_sensores()
+		
+	yield(get_tree().create_timer(1.0), "timeout")
+	flujo.visible = false
+	emit_signal("mezcla_final_depositada")
 
 func cerrar_valvula_final():
 	if valvula_abierta:
